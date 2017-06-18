@@ -1,0 +1,23 @@
+
+Create an HBase table named 'clicks' with a column family 'hits' such that it should be able to
+store last 5 values of qualifiers inside 'hits' column family.
+
+	hbase> create 'clicks' ,{NAME=>'hits',VERSIONS=>5}
+
+
+Add few records in the table and update some of them. Use IP Address as row-key. Scan the
+table to view if all the previous versions are getting displayed.
+
+	hbase> put 'clicks', 'IP1','hits:firstshot','500mp'
+	hbase> put 'clicks', 'IP1','hits:firstshot','700mp'
+	hbase> put 'clicks', 'IP1','hits:firstshot','850mp'
+
+	hbase> put 'clicks', 'IP2','hits:secondshot','400mp'
+	hbase> put 'clicks', 'IP3','hits:firstshot','500mp'
+	hbase> put 'clicks', 'IP4','hits:firstshot','500mp'
+
+	hbase>scan 'clicks'
+
+
+
+
